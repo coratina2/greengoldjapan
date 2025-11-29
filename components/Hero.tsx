@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full h-[85svh] min-h-[600px] md:h-[100vh] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-tea-900">
+    <section className="relative w-full h-[100svh] min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-tea-900">
       {/* Background Image with Parallax */}
       <motion.div
         style={{ y: y1 }}
@@ -33,10 +33,24 @@ const Hero: React.FC = () => {
           transition={{ duration: 10, ease: "easeOut" }}
           className="w-full h-full"
         >
-          <img
+          <motion.img
             src="/hero-bg-new.png"
             alt="Various Japanese Teas"
             className="w-full h-full object-cover opacity-80"
+            initial={{ scale: 1.1, objectPosition: "0% 50%" }}
+            animate={{
+              scale: 1,
+              objectPosition: ["0% 50%", "100% 50%", "0% 50%"]
+            }}
+            transition={{
+              scale: { duration: 10, ease: "easeOut" },
+              objectPosition: {
+                duration: 40,
+                ease: "linear",
+                repeat: Infinity,
+                repeatType: "loop"
+              }
+            }}
           />
         </motion.div>
         {/* Dark overlay for text readability */}
