@@ -6,6 +6,16 @@ const Hero: React.FC = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const textVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
@@ -24,7 +34,7 @@ const Hero: React.FC = () => {
     <section className="relative w-full h-[100svh] min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-tea-900">
       {/* Background Image with Parallax */}
       <motion.div
-        style={{ y: y1 }}
+        style={{ y: isMobile ? 0 : y1 }}
         className="absolute inset-0 z-0 overflow-hidden"
       >
         <motion.div
@@ -58,7 +68,7 @@ const Hero: React.FC = () => {
       </motion.div>
 
       <motion.div
-        style={{ y: y2 }}
+        style={{ y: isMobile ? 0 : y2 }}
         className="relative z-10 container max-w-6xl mx-auto px-6 text-center text-white pt-20"
       >
         <motion.div
