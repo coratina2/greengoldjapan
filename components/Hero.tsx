@@ -21,14 +21,14 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full h-[100vh] min-h-[700px] flex items-center justify-center overflow-hidden bg-tea-900">
+    <section className="relative w-full h-[100vh] min-h-[100svh] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-tea-900">
       {/* Background Image with Parallax */}
       <motion.div
         style={{ y: y1 }}
         className="absolute inset-0 z-0 overflow-hidden"
       >
         <motion.div
-          initial={{ scale: 1.1 }}
+          initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
           transition={{ duration: 10, ease: "easeOut" }}
           className="w-full h-full"
