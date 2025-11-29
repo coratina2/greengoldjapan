@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full h-[100vh] min-h-[100svh] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-tea-900">
+    <section className="relative w-full h-[85svh] min-h-[600px] md:h-[100vh] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-tea-900">
       {/* Background Image with Parallax */}
       <motion.div
         style={{ y: y1 }}
@@ -59,7 +59,7 @@ const Hero: React.FC = () => {
           </span>
         </motion.div>
 
-        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.05] mb-8 tracking-tight drop-shadow-lg">
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.05] mb-8 tracking-tight drop-shadow-lg">
           {["Platform", "To"].map((word, i) => (
             <motion.span
               key={i}
