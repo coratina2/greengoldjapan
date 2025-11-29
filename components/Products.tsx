@@ -80,9 +80,9 @@ const Products: React.FC = () => {
   };
 
   const handleDragEnd = (event: any, info: any) => {
-    if (info.offset.x < -50) {
+    if (info.offset.x < -100) {
       nextSlide();
-    } else if (info.offset.x > 50) {
+    } else if (info.offset.x > 100) {
       prevSlide();
     }
   };
@@ -130,10 +130,10 @@ const Products: React.FC = () => {
           <motion.div
             className="flex"
             animate={{ x: `-${currentIndex * (100 / visibleItems)}%` }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ type: "spring", stiffness: 200, damping: 35, mass: 0.8 }}
             drag="x"
-            dragConstraints={{ left: 0, right: 0 }} // We handle movement via state, drag is just for gesture detection
-            dragElastic={0.1}
+            dragMomentum={false}
+            dragElastic={0.2}
             onDragEnd={handleDragEnd}
           >
             {products.map((product, index) => (
