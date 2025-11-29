@@ -5,15 +5,35 @@ import { Check, Loader2 } from 'lucide-react';
 const Contact: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus('submitting');
-    // Simulate API call
-    setTimeout(() => {
-      setFormStatus('success');
-      // Optional: reset to idle after a few seconds
-      setTimeout(() => setFormStatus('idle'), 4000);
-    }, 2000);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formspree.io/f/xyzqawkk', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        form.reset();
+        // Reset to idle after 4 seconds
+        setTimeout(() => setFormStatus('idle'), 4000);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('送信に失敗しました。もう一度お試しください。');
+      setFormStatus('idle');
+    }
   };
 
   return (
@@ -61,6 +81,7 @@ const Contact: React.FC = () => {
                       <input
                         type="text"
                         id="name"
+                        name="name"
                         required
                         className="w-full py-3 bg-transparent border-b border-stone-200 focus:outline-none transition-all placeholder:text-stone-300 font-serif text-xl peer"
                         placeholder="John Doe"
@@ -74,6 +95,7 @@ const Contact: React.FC = () => {
                       <input
                         type="email"
                         id="email"
+                        name="email"
                         required
                         className="w-full py-3 bg-transparent border-b border-stone-200 focus:outline-none transition-all placeholder:text-stone-300 font-serif text-xl peer"
                         placeholder="john@cafe.com"
@@ -89,6 +111,7 @@ const Contact: React.FC = () => {
                     <input
                       type="tel"
                       id="phone"
+                      name="phone"
                       className="w-full py-3 bg-transparent border-b border-stone-200 focus:outline-none transition-all placeholder:text-stone-300 font-serif text-xl peer"
                       placeholder="+1 (555) 000-0000"
                     />
@@ -101,6 +124,7 @@ const Contact: React.FC = () => {
                   <div className="relative">
                     <textarea
                       id="message"
+                      name="message"
                       rows={3}
                       required
                       className="w-full py-3 bg-transparent border-b border-stone-200 focus:outline-none transition-all placeholder:text-stone-300 font-serif text-xl resize-none peer"
@@ -115,8 +139,8 @@ const Contact: React.FC = () => {
                     type="submit"
                     disabled={formStatus !== 'idle'}
                     className={`w-full py-5 font-bold tracking-widest uppercase text-xs rounded-sm transition-all shadow-lg flex justify-center items-center gap-2 ${formStatus === 'success'
-                        ? 'bg-tea-500 text-white shadow-none'
-                        : 'bg-gold-400 text-white hover:bg-gold-500 hover:shadow-xl transform active:scale-[0.99]'
+                      ? 'bg-tea-500 text-white shadow-none'
+                      : 'bg-gold-400 text-white hover:bg-gold-500 hover:shadow-xl transform active:scale-[0.99]'
                       }`}
                   >
                     {formStatus === 'submitting' ? (
