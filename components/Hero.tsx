@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
             transition={{
               scale: { duration: 10, ease: "easeOut" },
               objectPosition: {
-                duration: 40,
+                duration: 20,
                 ease: "linear",
                 repeat: Infinity,
                 repeatType: "loop"
