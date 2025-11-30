@@ -1,57 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GreenGold | Direct Japanese Tea Sourcing</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Lato', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta Tags -->
+  <title>GreenGold | Direct Japanese Tea Sourcing Platform for Cafés</title>
+  <meta name="title" content="GreenGold | Direct Japanese Tea Sourcing Platform for Cafés" />
+  <meta name="description"
+    content="Connect your café with 250+ authentic Japanese tea farmers and producers. Source premium matcha, sencha, hojicha, and genmaicha directly — transparent pricing, consistent supply, no middlemen." />
+  <meta name="keywords"
+    content="Japanese tea sourcing, matcha wholesale, sencha supplier, hojicha powder, direct tea sourcing, café tea supplier, Japanese tea farmers, premium matcha, tea import, wholesale Japanese tea" />
+  <meta name="author" content="GreenGold" />
+  <link rel="canonical" href="https://greengoldjapan.com/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://greengoldjapan.com/" />
+  <meta property="og:title" content="GreenGold | Direct Japanese Tea Sourcing Platform for Cafés" />
+  <meta property="og:description"
+    content="Connect your café with 250+ authentic Japanese tea farmers and producers. Source premium matcha, sencha, hojicha, and genmaicha directly — transparent pricing, consistent supply, no middlemen." />
+  <meta property="og:image" content="https://greengoldjapan.com/hero-bg-new.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://greengoldjapan.com/" />
+  <meta property="twitter:title" content="GreenGold | Direct Japanese Tea Sourcing Platform for Cafés" />
+  <meta property="twitter:description"
+    content="Connect your café with 250+ authentic Japanese tea farmers and producers. Source premium matcha, sencha, hojicha, and genmaicha directly — transparent pricing, consistent supply, no middlemen." />
+  <meta property="twitter:image" content="https://greengoldjapan.com/hero-bg-new.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/logo-greengold.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/logo-greengold.png" />
+  <link rel="apple-touch-icon" href="/logo-greengold.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Lato', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            tea: {
+              50: '#f4f9f4',
+              100: '#e3f2e4',
+              200: '#c6e4c9',
+              300: '#9acc9f',
+              400: '#6ba872',
+              500: '#4a8b51',
+              600: '#386f3e',
+              700: '#2f5834',
+              800: '#28462d',
+              900: '#223a26', // Deep Matcha
             },
-            colors: {
-              tea: {
-                50: '#f4f9f4',
-                100: '#e3f2e4',
-                200: '#c6e4c9',
-                300: '#9acc9f',
-                400: '#6ba872',
-                500: '#4a8b51',
-                600: '#386f3e',
-                700: '#2f5834',
-                800: '#28462d',
-                900: '#223a26', // Deep Matcha
-              },
-              gold: {
-                400: '#d4af37',
-                500: '#c5a028',
-              }
+            gold: {
+              400: '#d4af37',
+              500: '#c5a028',
             }
           }
         }
       }
-    </script>
-    <style>
-      /* Custom scrollbar for webkit */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
-    </style>
+    }
+  </script>
+  <style>
+    /* Custom scrollbar for webkit */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -63,10 +99,42 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "GreenGold",
+      "url": "https://greengoldjapan.com",
+      "logo": "https://greengoldjapan.com/logo-greengold.png",
+      "description": "Direct Japanese tea sourcing platform connecting cafés with 250+ authentic tea farmers and producers across Japan.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "url": "https://greengoldjapan.com/#contact"
+      },
+      "sameAs": []
+    }
+    </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "GreenGold",
+      "url": "https://greengoldjapan.com",
+      "description": "Direct Japanese tea sourcing platform for cafés. Source premium matcha, sencha, hojicha, and genmaicha directly from 250+ farmers and producers.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "GreenGold"
+      }
+    }
+    </script>
 </head>
-  <body class="bg-stone-50 text-stone-800 antialiased selection:bg-tea-200 selection:text-tea-900">
-    <div id="root"></div>
+
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-tea-200 selection:text-tea-900">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
