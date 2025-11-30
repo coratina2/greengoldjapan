@@ -11,7 +11,7 @@ const About: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-stone-50/95 backdrop-blur-sm md:backdrop-blur-xl p-8 md:p-12 rounded-sm border border-stone-100 shadow-xl text-left relative overflow-hidden"
+            className="bg-stone-50/95 backdrop-blur-xl p-8 md:p-12 rounded-sm border border-stone-100 shadow-xl text-left relative overflow-hidden"
           >
             {/* Background Texture (Kare-sansui style ripples) */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none"

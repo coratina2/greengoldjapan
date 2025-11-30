@@ -45,7 +45,7 @@ const App: React.FC = () => {
 
       {/* Scroll Progress Bar - Changed to Gold */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gold-500 origin-left z-[60] hidden md:block"
+        className="fixed top-0 left-0 right-0 h-1 bg-gold-500 origin-left z-[60]"
         style={{ scaleX }}
       />
 
