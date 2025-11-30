@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
         >
           <motion.img
             src="/hero-bg-new.png"
-            alt="Various Japanese Teas"
+            alt="Japanese tea fields with Mount Fuji in the background"
             className="w-full h-full object-cover opacity-80"
             initial={{ scale: 1.1, objectPosition: "0% 50%" }}
             animate={{
