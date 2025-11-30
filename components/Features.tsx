@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Users, Scale, Globe, TrendingUp, LucideIcon } from 'lucide-react';
 
@@ -34,9 +34,9 @@ const features: FeatureItem[] = [
 // 3D Tilt Card Component
 const TiltCard: React.FC<{ feature: FeatureItem; index: number }> = ({ feature, index }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
