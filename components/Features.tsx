@@ -34,6 +34,16 @@ const features: FeatureItem[] = [
 // 3D Tilt Card Component
 const TiltCard: React.FC<{ feature: FeatureItem; index: number }> = ({ feature, index }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -42,6 +52,7 @@ const TiltCard: React.FC<{ feature: FeatureItem; index: number }> = ({ feature, 
   const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
 
   function onMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    if (isMobile) return; // Disable on mobile
     const { left, top, width, height } = currentTarget.getBoundingClientRect();
     x.set(clientX - left - width / 2);
     y.set(clientY - top - height / 2);
@@ -60,7 +71,7 @@ const TiltCard: React.FC<{ feature: FeatureItem; index: number }> = ({ feature, 
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      style={{
+      style={isMobile ? {} : {
         transformStyle: "preserve-3d",
         rotateX,
         rotateY
@@ -82,20 +93,22 @@ const TiltCard: React.FC<{ feature: FeatureItem; index: number }> = ({ feature, 
         </p>
       </div>
 
-      {/* Subtle Gold Gradient Shine */}
-      <motion.div
-        style={{
-          background: useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(212, 175, 55, 0.08), transparent 80%)`,
-        }}
-        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-      />
+      {/* Subtle Gold Gradient Shine - Disabled on mobile */}
+      {!isMobile && (
+        <motion.div
+          style={{
+            background: useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(212, 175, 55, 0.08), transparent 80%)`,
+          }}
+          className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        />
+      )}
     </motion.div>
   );
 };
 
 const Features: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-stone-50 relative overflow-hidden perspective-[1000px]">
+    <section className="py-16 md:py-24 bg-stone-50 relative overflow-hidden md:perspective-[1000px]">
       {/* Background Decoration */}
       <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
