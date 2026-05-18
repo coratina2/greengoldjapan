@@ -338,14 +338,14 @@ export default function App() {
                           }}
                         />
                         <div className="absolute left-3 right-3 top-3 h-[58%] rounded-[2px] bg-[rgba(11,79,47,0.72)] backdrop-blur-[1px]" />
-                        <div className="flex justify-between items-start mb-8">
+                        <div className="relative z-10 flex justify-between items-start mb-8">
                           <span className="text-[10px] text-[rgba(255,255,255,0.82)]">{String(i + 1).padStart(2, "0")}</span>
                           <Database className="w-3 h-3 text-[rgba(255,255,255,0.70)]" />
                         </div>
-                        <h3 className="text-xs font-bold tracking-widest mb-1 text-[var(--white)] uppercase">{origin.name}</h3>
-                        <span className="text-[9px] uppercase tracking-tighter mb-5 block text-[rgba(255,255,255,0.82)]">{origin.location}</span>
-                        <p className="text-[10px] leading-relaxed max-w-[28ch] text-[rgba(255,255,255,0.92)]">{origin.cultivars}</p>
-                        <div className="absolute bottom-2 right-3 text-[8px] tracking-[0.10em] uppercase text-[rgba(255,255,255,0.70)] font-semibold">
+                        <h3 className="relative z-10 text-xs font-bold tracking-widest mb-1 text-[var(--white)] uppercase">{origin.name}</h3>
+                        <span className="relative z-10 text-[9px] uppercase tracking-tighter mb-5 block text-[rgba(255,255,255,0.82)]">{origin.location}</span>
+                        <p className="relative z-10 text-[10px] leading-relaxed max-w-[28ch] text-[rgba(255,255,255,0.92)]">{origin.cultivars}</p>
+                        <div className="absolute z-10 bottom-2 right-3 text-[8px] tracking-[0.10em] uppercase text-[rgba(255,255,255,0.70)] font-semibold">
                           Node {String(i + 1).padStart(2, "0")}
                         </div>
                       </div>
@@ -360,12 +360,9 @@ export default function App() {
                           }}
                         />
                         <div className="absolute left-3 right-3 top-3 h-[62%] rounded-[2px] bg-[rgba(11,79,47,0.72)] backdrop-blur-[1px]" />
-                        <span className="text-[9px] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.70)] block mb-4">Origin Overview</span>
-                        <h3 className="text-xs font-bold tracking-widest mb-3 text-[var(--white)] uppercase">{origin.name}</h3>
-                        <p className="text-[11px] leading-relaxed max-w-[30ch] text-[rgba(255,255,255,0.92)]">{origin.overview}</p>
-                        <div className="mt-auto pt-5 border-t border-[rgba(255,255,255,0.22)]">
-                          <div className="text-[8px] uppercase tracking-[0.14em] text-[rgba(255,255,255,0.70)]">Topographic Intelligence Layer</div>
-                        </div>
+                        <span className="relative z-10 text-[9px] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.70)] block mb-4">Origin Overview</span>
+                        <h3 className="relative z-10 text-xs font-bold tracking-widest mb-3 text-[var(--white)] uppercase">{origin.name}</h3>
+                        <p className="relative z-10 text-[11px] leading-relaxed max-w-[30ch] text-[rgba(255,255,255,0.92)]">{origin.overview}</p>
                       </div>
                     </div>
                   </button>
