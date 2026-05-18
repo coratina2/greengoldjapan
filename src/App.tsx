@@ -239,9 +239,7 @@ export default function App() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <button className="bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] text-[var(--white)] px-5 py-2 text-[10px] uppercase tracking-[0.16em] font-semibold border border-[var(--primary-green)] transition-colors">
-              JA
-            </button>
+            <div className="w-[66px] h-[32px]" aria-hidden="true" />
           </div>
         </header>
 
