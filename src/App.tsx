@@ -232,22 +232,24 @@ export default function App() {
       <div className="fixed inset-0 z-0 abstract-mesh dot-pattern opacity-10 pointer-events-none" />
 
       <div className="relative z-10 editorial-grid border-b border-brand-outline">
-        <header className="md:col-span-12 h-20 grid-cell flex-row items-center justify-between border-b border-[var(--header-border)] bg-[var(--header-bg)]">
-          <div className="flex items-center pr-4">
-            <img src="/green-gold-japan-logo-cropped.png" alt="Logo" className="h-[68px] md:h-[76px] w-auto object-contain" />
-          </div>
-          <div className="hidden md:flex items-center justify-center flex-1 px-6">
-            <span className="font-sans font-medium text-[13px] tracking-[0.22em] uppercase text-[var(--secondary-text)] whitespace-nowrap">
-              Matcha / Hojicha / OEM
-            </span>
-          </div>
-          <div className="flex items-center pl-4">
-            <a
-              href={catalogMailto}
-              className="font-sans font-semibold text-[12px] tracking-[0.18em] uppercase text-[var(--primary-green)] border border-[var(--primary-green)] rounded-[2px] px-4 md:px-5 py-2 transition-colors duration-200 hover:bg-[var(--primary-green)] hover:text-[var(--white)] whitespace-nowrap"
-            >
-              Request Catalog
-            </a>
+        <header className="md:col-span-12 grid-cell border-b border-[var(--header-border)] bg-[var(--header-bg)]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center pr-4">
+              <img src="/green-gold-japan-logo-cropped.png" alt="Logo" className="h-[68px] md:h-[76px] w-auto object-contain" />
+            </div>
+            <div className="flex items-center justify-center flex-1 px-3 md:px-6 min-w-0">
+              <span className="font-sans font-medium text-[10px] md:text-[13px] tracking-[0.14em] md:tracking-[0.22em] uppercase text-[var(--secondary-text)] whitespace-nowrap truncate">
+                Matcha / Hojicha / OEM
+              </span>
+            </div>
+            <div className="flex items-center pl-4">
+              <a
+                href={catalogMailto}
+                className="font-sans font-semibold text-[12px] tracking-[0.18em] uppercase text-[var(--primary-green)] border border-[var(--primary-green)] rounded-[2px] px-4 md:px-5 py-2 transition-colors duration-200 hover:bg-[var(--primary-green)] hover:text-[var(--white)] whitespace-nowrap"
+              >
+                Request Catalog
+              </a>
+            </div>
           </div>
         </header>
 
@@ -303,13 +305,13 @@ export default function App() {
               </div>
             </div>
             <div className="flex-1 overflow-x-auto">
-              <div className="flex gap-px min-w-max">
+              <div className="flex gap-[10px] md:gap-[14px] min-w-max p-3 md:p-4">
                 {originCards.map((origin, i) => (
                   <button
                     key={origin.name}
                     type="button"
                     aria-label={`${origin.name} origin card, tap to ${flippedCards[i] ? "show front" : "show overview"}`}
-                    className="relative w-[254px] h-[286px] cursor-pointer border-r border-brand-outline bg-white text-left"
+                    className="relative w-[254px] h-[286px] cursor-pointer border border-[rgba(17,24,20,0.10)] bg-[#F8F8F3] shadow-[0_12px_28px_rgba(17,24,20,0.08)] overflow-hidden text-left"
                     onPointerDown={(e) => setDragState((prev) => ({ ...prev, [i]: { x: e.clientX, y: e.clientY, moved: false } }))}
                     onPointerMove={(e) =>
                       setDragState((prev) => {
@@ -335,15 +337,15 @@ export default function App() {
                             backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.png')`,
                           }}
                         />
-                        <div className="absolute left-3 right-3 top-3 h-[58%] rounded-[2px] bg-[var(--map-tile-overlay)]" />
+                        <div className="absolute left-3 right-3 top-3 h-[58%] rounded-[2px] bg-[rgba(11,79,47,0.72)] backdrop-blur-[1px]" />
                         <div className="flex justify-between items-start mb-8">
-                          <span className="text-[10px] text-[var(--secondary-text)] [text-shadow:0_1px_2px_rgba(255,255,255,0.7)]">{String(i + 1).padStart(2, "0")}</span>
-                          <Database className="w-3 h-3 text-[var(--primary-green)]/70" />
+                          <span className="text-[10px] text-[rgba(255,255,255,0.82)]">{String(i + 1).padStart(2, "0")}</span>
+                          <Database className="w-3 h-3 text-[rgba(255,255,255,0.70)]" />
                         </div>
-                        <h3 className="text-xs font-bold tracking-widest mb-1 opacity-95 [text-shadow:0_1px_2px_rgba(255,255,255,0.75)]">{origin.name}</h3>
-                        <span className="text-[9px] opacity-75 uppercase tracking-tighter mb-5 block [text-shadow:0_1px_2px_rgba(255,255,255,0.75)]">{origin.location}</span>
-                        <p className="text-[10px] leading-relaxed opacity-90 max-w-[28ch] [text-shadow:0_1px_2px_rgba(255,255,255,0.75)]">{origin.cultivars}</p>
-                        <div className="absolute bottom-2 right-2 text-[8px] tracking-[0.12em] uppercase text-[var(--secondary-text)] font-semibold">
+                        <h3 className="text-xs font-bold tracking-widest mb-1 text-[var(--white)] uppercase">{origin.name}</h3>
+                        <span className="text-[9px] uppercase tracking-tighter mb-5 block text-[rgba(255,255,255,0.82)]">{origin.location}</span>
+                        <p className="text-[10px] leading-relaxed max-w-[28ch] text-[rgba(255,255,255,0.92)]">{origin.cultivars}</p>
+                        <div className="absolute bottom-2 right-3 text-[8px] tracking-[0.10em] uppercase text-[rgba(255,255,255,0.70)] font-semibold">
                           Node {String(i + 1).padStart(2, "0")}
                         </div>
                       </div>
@@ -357,12 +359,12 @@ export default function App() {
                             backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.png')`,
                           }}
                         />
-                        <div className="absolute left-3 right-3 top-3 h-[62%] rounded-[2px] bg-[var(--map-tile-overlay)]" />
-                        <span className="text-[9px] uppercase tracking-[0.16em] opacity-72 block mb-4 [text-shadow:0_1px_2px_rgba(255,255,255,0.78)]">Origin Overview</span>
-                        <h3 className="text-xs font-bold tracking-widest mb-3 opacity-95 [text-shadow:0_1px_2px_rgba(255,255,255,0.78)]">{origin.name}</h3>
-                        <p className="text-[11px] leading-relaxed opacity-90 max-w-[30ch] [text-shadow:0_1px_2px_rgba(255,255,255,0.78)]">{origin.overview}</p>
-                        <div className="mt-auto pt-5 border-t border-brand-outline/60">
-                          <div className="text-[8px] uppercase tracking-[0.14em] text-brand-charcoal/55">Topographic Intelligence Layer</div>
+                        <div className="absolute left-3 right-3 top-3 h-[62%] rounded-[2px] bg-[rgba(11,79,47,0.72)] backdrop-blur-[1px]" />
+                        <span className="text-[9px] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.70)] block mb-4">Origin Overview</span>
+                        <h3 className="text-xs font-bold tracking-widest mb-3 text-[var(--white)] uppercase">{origin.name}</h3>
+                        <p className="text-[11px] leading-relaxed max-w-[30ch] text-[rgba(255,255,255,0.92)]">{origin.overview}</p>
+                        <div className="mt-auto pt-5 border-t border-[rgba(255,255,255,0.22)]">
+                          <div className="text-[8px] uppercase tracking-[0.14em] text-[rgba(255,255,255,0.70)]">Topographic Intelligence Layer</div>
                         </div>
                       </div>
                     </div>
@@ -440,8 +442,8 @@ export default function App() {
                           <span className="text-[9px] tracking-[0.12em] text-[var(--secondary-text)]">OSN-JP-026</span>
                         </div>
                       </div>
-                      <div className="mt-3 h-[104px] flex items-end justify-center pb-3">
-                        <img src="/green-gold-japan-logo-cropped.png" alt="Catalog logo" className="h-20 md:h-24 w-auto object-contain" />
+                      <div className="mt-3 h-[136px] md:h-[104px] flex items-center justify-center pb-0 md:pb-3">
+                        <img src="/green-gold-japan-logo-cropped.png" alt="Catalog logo" className="h-16 md:h-24 w-auto object-contain" />
                       </div>
                     </div>
                   </div>
