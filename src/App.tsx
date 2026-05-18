@@ -232,14 +232,22 @@ export default function App() {
       <div className="fixed inset-0 z-0 abstract-mesh dot-pattern opacity-10 pointer-events-none" />
 
       <div className="relative z-10 editorial-grid border-b border-brand-outline">
-        <header className="md:col-span-12 h-20 grid-cell flex-row items-center justify-between border-b border-[var(--header-border)] bg-[var(--header-bg)] backdrop-blur-[6px]">
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-3">
-              <img src="/green-gold-japan-logo-cropped.png" alt="Logo" className="h-[68px] md:h-[76px] w-auto object-contain" />
-            </div>
+        <header className="md:col-span-12 h-20 grid-cell flex-row items-center justify-between border-b border-[var(--header-border)] bg-[var(--header-bg)]">
+          <div className="flex items-center pr-4">
+            <img src="/green-gold-japan-logo-cropped.png" alt="Logo" className="h-[68px] md:h-[76px] w-auto object-contain" />
           </div>
-          <div className="flex items-center gap-4">
-            <div className="w-[66px] h-[32px]" aria-hidden="true" />
+          <div className="hidden md:flex items-center justify-center flex-1 px-6">
+            <span className="font-sans font-medium text-[13px] tracking-[0.22em] uppercase text-[var(--secondary-text)] whitespace-nowrap">
+              Matcha / Hojicha / OEM
+            </span>
+          </div>
+          <div className="flex items-center pl-4">
+            <a
+              href={catalogMailto}
+              className="font-sans font-semibold text-[12px] tracking-[0.18em] uppercase text-[var(--primary-green)] border border-[var(--primary-green)] rounded-[2px] px-4 md:px-5 py-2 transition-colors duration-200 hover:bg-[var(--primary-green)] hover:text-[var(--white)] whitespace-nowrap"
+            >
+              Request Catalog
+            </a>
           </div>
         </header>
 
