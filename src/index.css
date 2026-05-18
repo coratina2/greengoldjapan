@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --page-bg: #F6F7F1;
+  --header-bg: #FFFFFF;
+  --header-border: #E1E4D8;
+  --primary-green: #0B4F2F;
+  --primary-green-hover: #083D25;
+  --deep-text: #111814;
+  --secondary-text: #4E5A50;
+  --muted-text: #6D786D;
+  --stats-bg: #EAF0DD;
+  --stats-line: #C9D3BD;
+  --origin-bg: #E6E1D6;
+  --origin-label-bg: #D8D0C2;
+  --catalog-bg: #F3F5EC;
+  --company-bg: #F8F8F3;
+  --company-border: #D9DED2;
+  --gold-accent: #B9903D;
+  --white: #FFFFFF;
+  --hero-overlay: rgba(0, 0, 0, 0.12);
+  --map-tile-overlay: rgba(230, 225, 214, 0.76);
+  --catalog-shadow: rgba(17, 24, 20, 0.18);
+}
+
+@theme {
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-bone: var(--page-bg);
+  --color-brand-olive: var(--primary-green);
+  --color-brand-matcha: var(--primary-green);
+  --color-brand-charcoal: var(--deep-text);
+  --color-brand-outline: var(--company-border);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bone text-brand-charcoal antialiased selection:bg-brand-matcha/20;
+    letter-spacing: 0.005em;
+  }
+}
+
+@layer components {
+  .editorial-grid {
+    @apply grid grid-cols-1 md:grid-cols-12 gap-px bg-brand-outline border-brand-outline;
+  }
+
+  .grid-cell {
+    @apply bg-brand-bone p-7 md:p-9 flex flex-col justify-center;
+  }
+  
+  .section-label {
+    @apply font-sans text-[11px] uppercase tracking-[0.14em] text-[var(--muted-text)] font-semibold mb-4 block;
+  }
+
+  .abstract-mesh {
+    background: radial-gradient(circle at 70% 30%, rgba(62, 122, 82, 0.08) 0%, transparent 62%),
+                radial-gradient(circle at 30% 70%, rgba(15, 79, 45, 0.06) 0%, transparent 54%);
+  }
+
+  .dot-pattern {
+    background-image: radial-gradient(rgba(17, 20, 18, 0.12) 0.5px, transparent 0.5px);
+    background-size: 26px 26px;
+  }
+}
