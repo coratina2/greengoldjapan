@@ -22,6 +22,7 @@ export default function App() {
   const [hash, setHash] = useState(window.location.hash);
   const isTermsPage = hash === "#/terms";
   const isPrivacyPage = hash === "#/privacy";
+  const isRequestCatalogPage = hash === "#/request-catalog";
   const [formState, handleCatalogSubmit] = useForm("xkoenyej");
 
   useEffect(() => {
@@ -222,6 +223,92 @@ export default function App() {
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">14. CONTACT</h2><p>For privacy-related inquiries:</p><p className="mt-2">GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Email:<br /><a href="mailto:info@greengoldjapan.com">info@greengoldjapan.com</a></p></section>
             </div>
           </article>
+        </main>
+      </div>
+    );
+  }
+
+  if (isRequestCatalogPage) {
+    return (
+      <div className="min-h-screen bg-[var(--page-bg)] text-[var(--deep-text)]">
+        <main className="max-w-[720px] mx-auto px-6 md:px-8 py-12 md:py-16">
+          <div className="mb-8">
+            <a href="#" className="text-[var(--primary-green)] hover:text-[var(--primary-green-hover)] text-sm uppercase tracking-[0.12em]">
+              Back to Home
+            </a>
+          </div>
+
+          <header className="mb-8 md:mb-10">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--deep-text)]">Request Catalog</h1>
+            <p className="mt-3 text-[15px] md:text-base text-[var(--secondary-text)] leading-relaxed">
+              Tell us about your sourcing needs and we will get back to you shortly.
+            </p>
+          </header>
+
+          <section className="bg-[var(--white)] border border-[var(--company-border)] shadow-[0_12px_28px_rgba(17,24,20,0.08)] p-5 md:p-8">
+            {formState.succeeded ? (
+              <p className="text-[15px] leading-relaxed text-[var(--deep-text)]">
+                Thank you. We will contact you shortly.
+              </p>
+            ) : (
+              <form onSubmit={handleCatalogSubmit} className="space-y-4">
+                <input type="hidden" name="_subject" value="Catalog Request - GreenGold Japan" />
+                <input type="hidden" name="source" value="GreenGold Japan LP" />
+
+                <div>
+                  <label htmlFor="name" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Full Name</label>
+                  <input id="name" name="name" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                </div>
+
+                <div>
+                  <label htmlFor="company" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Company Name</label>
+                  <input id="company" name="company" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Business Email</label>
+                  <input id="email" type="email" name="email" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                  <ValidationError prefix="Email" field="email" errors={formState.errors} className="mt-1 text-[11px] text-red-700" />
+                </div>
+
+                <div>
+                  <label htmlFor="country" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Country / Region</label>
+                  <input id="country" name="country" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                </div>
+
+                <div>
+                  <label htmlFor="estimated_monthly_volume" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Estimated Monthly Volume</label>
+                  <input id="estimated_monthly_volume" type="text" name="estimated_monthly_volume" required placeholder="e.g. 30 kg/month, 100–300 kg/month, or not sure yet" className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Inquiry Details (Optional)</label>
+                  <textarea id="message" name="message" rows={5} placeholder="Please share your sourcing needs, preferred tea types, certifications, or any specific requirements." className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                  <ValidationError prefix="Message" field="message" errors={formState.errors} className="mt-1 text-[11px] text-red-700" />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={formState.submitting}
+                  className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] disabled:opacity-75 disabled:cursor-not-allowed py-3 text-[11px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors"
+                >
+                  {formState.submitting ? "Sending..." : "Request Catalog"}
+                </button>
+
+                {formState.errors && formState.errors.length > 0 && !formState.submitting && (
+                  <p className="text-[13px] text-[var(--deep-text)]">
+                    Submission failed. Please contact us at{" "}
+                    <a href="mailto:info@greengoldjapan.com" className="underline">info@greengoldjapan.com</a>.
+                  </p>
+                )}
+
+                <p className="text-[11px] leading-relaxed text-[var(--secondary-text)]">
+                  By submitting this form, you agree that we may use your information to respond to your inquiry in accordance with our{" "}
+                  <a href="#/privacy" className="underline text-[var(--deep-text)]">Privacy Policy</a>.
+                </p>
+              </form>
+            )}
+          </section>
         </main>
       </div>
     );
@@ -450,70 +537,6 @@ export default function App() {
             <div className="order-2 space-y-4 w-full md:max-w-[320px] md:mx-auto">
               <p className="text-[10px] uppercase tracking-[0.12em] text-[var(--secondary-text)]">Full pricing, MOQ, and current availability are provided after inquiry.</p>
               <a href="#request-catalog" className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors text-center block">Request Catalog</a>
-              <div id="request-catalog" className="mt-2 border border-[var(--company-border)] bg-[var(--company-bg)] p-4 md:p-5">
-                {formState.succeeded ? (
-                  <p className="text-[13px] leading-relaxed text-[var(--deep-text)]">
-                    Thank you. We will contact you shortly.
-                  </p>
-                ) : (
-                  <form onSubmit={handleCatalogSubmit} className="space-y-3">
-                    <input type="hidden" name="_subject" value="Catalog Request - GreenGold Japan" />
-                    <input type="hidden" name="source" value="GreenGold Japan LP" />
-
-                    <div>
-                      <label htmlFor="name" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Full Name</label>
-                      <input id="name" name="name" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2 text-[13px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
-                    </div>
-
-                    <div>
-                      <label htmlFor="company" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Company Name</label>
-                      <input id="company" name="company" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2 text-[13px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Business Email</label>
-                      <input id="email" type="email" name="email" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2 text-[13px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
-                      <ValidationError prefix="Email" field="email" errors={formState.errors} className="mt-1 text-[11px] text-red-700" />
-                    </div>
-
-                    <div>
-                      <label htmlFor="country" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Country / Region</label>
-                      <input id="country" name="country" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2 text-[13px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
-                    </div>
-
-                    <div>
-                      <label htmlFor="estimated_monthly_volume" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Estimated Monthly Volume</label>
-                      <input id="estimated_monthly_volume" type="text" name="estimated_monthly_volume" required placeholder="e.g. 30 kg/month, 100–300 kg/month, or not sure yet" className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2 text-[13px] text-[var(--deep-text)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--primary-green)]" />
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Inquiry Details (Optional)</label>
-                      <textarea id="message" name="message" rows={4} placeholder="Please share your sourcing needs, preferred tea types, certifications, or any specific requirements." className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2 text-[13px] text-[var(--deep-text)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--primary-green)]" />
-                      <ValidationError prefix="Message" field="message" errors={formState.errors} className="mt-1 text-[11px] text-red-700" />
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={formState.submitting}
-                      className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] disabled:opacity-75 disabled:cursor-not-allowed py-3 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors"
-                    >
-                      {formState.submitting ? "Sending..." : "Request Catalog"}
-                    </button>
-
-                    {formState.errors && formState.errors.length > 0 && !formState.submitting && (
-                      <p className="text-[12px] text-[var(--deep-text)]">
-                        Submission failed. Please contact us at{" "}
-                        <a href="mailto:info@greengoldjapan.com" className="underline">info@greengoldjapan.com</a>.
-                      </p>
-                    )}
-
-                    <p className="text-[11px] leading-relaxed text-[var(--secondary-text)]">
-                      By submitting this form, you agree that we may use your information to respond to your inquiry in accordance with our{" "}
-                      <a href="#/privacy" className="underline text-[var(--deep-text)]">Privacy Policy</a>.
-                    </p>
-                  </form>
-                )}
-              </div>
             </div>
           </div>
           <div
