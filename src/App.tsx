@@ -256,33 +256,33 @@ export default function App() {
                 <input type="hidden" name="source" value="GreenGold Japan LP" />
 
                 <div>
-                  <label htmlFor="name" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Full Name</label>
+                  <label htmlFor="name" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">FULL NAME *</label>
                   <input id="name" name="name" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
                 </div>
 
                 <div>
-                  <label htmlFor="company" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Company Name</label>
+                  <label htmlFor="company" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">COMPANY NAME *</label>
                   <input id="company" name="company" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Business Email</label>
+                  <label htmlFor="email" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">BUSINESS EMAIL *</label>
                   <input id="email" type="email" name="email" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
                   <ValidationError prefix="Email" field="email" errors={formState.errors} className="mt-1 text-[11px] text-red-700" />
                 </div>
 
                 <div>
-                  <label htmlFor="country" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Country / Region</label>
+                  <label htmlFor="country" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">COUNTRY / REGION *</label>
                   <input id="country" name="country" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
                 </div>
 
                 <div>
-                  <label htmlFor="estimated_monthly_volume" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Estimated Monthly Volume</label>
+                  <label htmlFor="estimated_monthly_volume" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">ESTIMATED MONTHLY VOLUME *</label>
                   <input id="estimated_monthly_volume" type="text" name="estimated_monthly_volume" required placeholder="e.g. 30 kg/month, 100–300 kg/month, or not sure yet" className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--primary-green)]" />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">Inquiry Details (Optional)</label>
+                  <label htmlFor="message" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">INQUIRY DETAILS (OPTIONAL)</label>
                   <textarea id="message" name="message" rows={5} placeholder="Please share your sourcing needs, preferred tea types, certifications, or any specific requirements." className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--primary-green)]" />
                   <ValidationError prefix="Message" field="message" errors={formState.errors} className="mt-1 text-[11px] text-red-700" />
                 </div>
@@ -331,7 +331,7 @@ export default function App() {
             </div>
             <div className="flex items-center pl-4">
               <a
-                href="#request-catalog"
+                href="#/request-catalog"
                 className="font-sans font-semibold text-[12px] tracking-[0.18em] uppercase text-[var(--primary-green)] border border-[var(--primary-green)] rounded-[2px] px-4 md:px-5 py-2 transition-colors duration-200 hover:bg-[var(--primary-green)] hover:text-[var(--white)] whitespace-nowrap"
               >
                 Request Catalog
@@ -354,7 +354,7 @@ export default function App() {
               Flexible OEM with Cost Efficiency.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#request-catalog" className="border border-white/72 text-white bg-transparent px-8 py-4 text-[11px] uppercase tracking-[0.16em] font-semibold flex items-center gap-3 group hover:bg-white/12 transition-colors [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">
+              <a href="#/request-catalog" className="border border-white/72 text-white bg-transparent px-8 py-4 text-[11px] uppercase tracking-[0.16em] font-semibold flex items-center gap-3 group hover:bg-white/12 transition-colors [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">
                 Request Catalog <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -536,7 +536,7 @@ export default function App() {
             </div>
             <div className="order-2 space-y-4 w-full md:max-w-[320px] md:mx-auto">
               <p className="text-[10px] uppercase tracking-[0.12em] text-[var(--secondary-text)]">Full pricing, MOQ, and current availability are provided after inquiry.</p>
-              <a href="#request-catalog" className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors text-center block">Request Catalog</a>
+              <a href="#/request-catalog" className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors text-center block">Request Catalog</a>
             </div>
           </div>
           <div
