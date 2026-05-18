@@ -21,6 +21,8 @@ export default function App() {
   const [hash, setHash] = useState(window.location.hash);
   const isTermsPage = hash === "#/terms";
   const isPrivacyPage = hash === "#/privacy";
+  const catalogMailto =
+    "mailto:info@greengoldjapan.com?subject=Catalog%20Request%20-%20GreenGold%20Japan&body=Hello%20GreenGold%20Japan%2C%0A%0AI%20would%20like%20to%20request%20your%20latest%20catalog%20and%20discuss%20Japanese%20matcha%20/%20tea%20sourcing.%0A%0ACompany%3A%0AName%3A%0ACountry%3A%0AInquiry%20details%3A%0A";
 
   useEffect(() => {
     const onHashChange = () => setHash(window.location.hash);
@@ -165,7 +167,7 @@ export default function App() {
             <div className="space-y-6 text-[15px] leading-[1.75] text-[var(--secondary-text)]">
               <p>These Terms of Service ("Terms") govern your access to and use of the GreenGold Japan website (the "Website"), operated by General Future Co., Ltd. under the GreenGold Japan brand ("GreenGold", "we", "us", or "our").</p>
               <p>By accessing or using this Website, you agree to be bound by these Terms. If you do not agree, please do not use this Website.</p>
-              <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">1. COMPANY INFORMATION</h2><p>GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Contact:<br />info@greengoldjapan.com</p></section>
+              <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">1. COMPANY INFORMATION</h2><p>GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Contact:<br /><a href="mailto:info@greengoldjapan.com">info@greengoldjapan.com</a></p></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">2. BUSINESS PURPOSE OF THIS WEBSITE</h2><p>This Website is intended for informational and business communication purposes only.</p><p>GreenGold provides information relating to Japanese tea sourcing, matcha procurement support, OEM discussions, export-related business communications, and related commercial inquiries.</p><p>This Website is intended for business users, including distributors, importers, wholesalers, retailers, café operators, and commercial counterparties.</p></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">3. NO OFFER OR BINDING COMMITMENT</h2><p>All information presented on this Website, including product descriptions, catalog references, specifications, availability, MOQ indications, sourcing references, and other business information, is provided for general informational purposes only.</p><p>Nothing on this Website constitutes:</p><ul className="list-disc pl-6"><li>a legally binding offer,</li><li>a firm quotation,</li><li>a commitment to supply,</li><li>a guarantee of availability,</li><li>a promise of pricing continuity,</li><li>or a binding acceptance of any commercial transaction.</li></ul><p>Any actual transaction shall be subject to separate discussion, mutual agreement, and formal documentation where applicable.</p></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">4. PRODUCT INFORMATION DISCLAIMER</h2><p>Product specifications, origins, grades, packaging formats, pricing references, supply capabilities, lead times, compliance information, and availability may change without notice.</p><p>Actual terms may vary depending on supplier conditions, production capacity, harvest conditions, regulatory requirements, export restrictions, shipping constraints, and commercial negotiations.</p><p>Users must not rely solely on Website content for procurement decisions.</p></section>
@@ -180,7 +182,7 @@ export default function App() {
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">13. CHANGES TO THESE TERMS</h2><p>We may update these Terms at any time without prior notice.</p><p>Updated versions become effective when posted on this Website.</p></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">14. GOVERNING LAW</h2><p>These Terms shall be governed by and construed in accordance with the laws of Japan.</p></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">15. JURISDICTION</h2><p>Any dispute arising out of or relating to these Terms or the Website shall be subject to the exclusive jurisdiction of the Osaka District Court in Japan.</p></section>
-              <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">16. CONTACT</h2><p>GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Email:<br />info@greengoldjapan.com</p></section>
+              <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">16. CONTACT</h2><p>GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Email:<br /><a href="mailto:info@greengoldjapan.com">info@greengoldjapan.com</a></p></section>
             </div>
           </article>
         </main>
@@ -199,12 +201,12 @@ export default function App() {
           </div>
           <article className="bg-[var(--white)] border border-[var(--company-border)] p-6 md:p-10">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">PRIVACY POLICY</h1>
-            <p className="text-sm text-[var(--secondary-text)] mb-8">Last Updated: [2026/05/19]</p>
+            <p className="text-sm text-[var(--secondary-text)] mb-8">Last Updated: May 18, 2026</p>
             <div className="space-y-6 text-[15px] leading-[1.75] text-[var(--secondary-text)]">
               <p>This Privacy Policy describes how GreenGold Japan ("GreenGold", "we", "us", or "our"), operated by General Future Co., Ltd., collects, uses, stores, and discloses personal information when you visit our website, request catalogs, submit business inquiries, or otherwise communicate with us.</p>
               <p>This website is intended for business users, distributors, wholesalers, importers, OEM partners, and other commercial counterparties.</p>
               <p>By using this website, you acknowledge the practices described in this Privacy Policy.</p>
-              <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">1. COMPANY INFORMATION</h2><p>GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Contact:<br />info@greengoldjapan.com</p></section>
+              <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">1. COMPANY INFORMATION</h2><p>GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Contact:<br /><a href="mailto:info@greengoldjapan.com">info@greengoldjapan.com</a></p></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">2. INFORMATION WE COLLECT</h2><p>We may collect the following categories of information:</p><p className="mt-3 font-semibold text-[var(--deep-text)]">A. Information You Provide Directly</p><p>When you contact us, request a catalog, or submit an inquiry, we may collect:</p><ul className="list-disc pl-6"><li>Full name</li><li>Company name</li><li>Job title</li><li>Email address</li><li>Phone number</li><li>Country / region</li><li>Business requirements</li><li>Product interests</li><li>OEM / sourcing inquiry details</li><li>Any information voluntarily included in your message</li></ul><p className="mt-3 font-semibold text-[var(--deep-text)]">B. Information Collected Automatically</p><p>When you use our website, we may automatically collect:</p><ul className="list-disc pl-6"><li>IP address</li><li>Browser type</li><li>Device information</li><li>Operating system</li><li>Referring URLs</li><li>Website usage behavior</li><li>Session data</li><li>Cookie identifiers</li><li>Analytics data</li></ul></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">3. HOW WE USE YOUR INFORMATION</h2><p>We may use your information to:</p><ul className="list-disc pl-6"><li>Respond to inquiries</li><li>Provide requested catalogs or product information</li><li>Evaluate sourcing or OEM opportunities</li><li>Communicate regarding commercial discussions</li><li>Improve website performance and user experience</li><li>Conduct analytics and website optimization</li><li>Prevent spam, abuse, or fraudulent activity</li><li>Maintain security of our website and systems</li><li>Comply with legal obligations</li><li>Protect our legal rights and business interests</li></ul></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">4. COOKIES AND ANALYTICS</h2><p>We may use cookies, analytics tools, and similar technologies to improve website functionality and understand user behavior.</p><p>These technologies may collect information regarding:</p><ul className="list-disc pl-6"><li>Pages visited</li><li>Session duration</li><li>Device/browser characteristics</li><li>Geographic approximations</li><li>Referral sources</li></ul><p>You may disable cookies through your browser settings, although some functionality may be affected.</p></section>
@@ -217,7 +219,7 @@ export default function App() {
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">11. YOUR RIGHTS</h2><p>Depending on applicable law, you may have rights relating to your personal information, including:</p><ul className="list-disc pl-6"><li>Access</li><li>Correction</li><li>Deletion</li><li>Restriction</li><li>Objection</li><li>Withdrawal of consent (where applicable)</li></ul><p>Requests may be submitted using the contact details below.</p><p>We may require identity verification before responding.</p></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">12. MARKETING COMMUNICATIONS</h2><p>If we send business communications or follow-up communications, you may request that such communications stop at any time.</p><p>Operational or legally required communications may still be sent where necessary.</p></section>
               <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">13. CHANGES TO THIS POLICY</h2><p>We may revise this Privacy Policy from time to time.</p><p>Updated versions will be posted on this page with a revised effective date.</p></section>
-              <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">14. CONTACT</h2><p>For privacy-related inquiries:</p><p className="mt-2">GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Email:<br />info@greengoldjapan.com</p></section>
+              <section><h2 className="text-xl font-semibold text-[var(--deep-text)] mb-2">14. CONTACT</h2><p>For privacy-related inquiries:</p><p className="mt-2">GreenGold Japan<br />Powered by General Future Co., Ltd.<br />4-15-18 Nishitenma, Kita-ku, Osaka 530-0047, Japan</p><p className="mt-3">Email:<br /><a href="mailto:info@greengoldjapan.com">info@greengoldjapan.com</a></p></section>
             </div>
           </article>
         </main>
@@ -257,9 +259,9 @@ export default function App() {
               Flexible OEM with Cost Efficiency.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="border border-white/72 text-white bg-transparent px-8 py-4 text-[11px] uppercase tracking-[0.16em] font-semibold flex items-center gap-3 group hover:bg-white/12 transition-colors [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">
+              <a href={catalogMailto} className="border border-white/72 text-white bg-transparent px-8 py-4 text-[11px] uppercase tracking-[0.16em] font-semibold flex items-center gap-3 group hover:bg-white/12 transition-colors [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">
                 Request Catalog <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
             </div>
           </div>
         </section>
@@ -442,7 +444,7 @@ export default function App() {
             </div>
             <div className="order-2 space-y-4 w-full md:max-w-[320px] md:mx-auto">
               <p className="text-[10px] uppercase tracking-[0.12em] text-[var(--secondary-text)]">Full pricing, MOQ, and current availability are provided after inquiry.</p>
-              <button className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors">Request Catalog</button>
+              <a href={catalogMailto} className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors text-center block">Request Catalog</a>
             </div>
           </div>
           <div
@@ -476,7 +478,6 @@ export default function App() {
           <div className="flex gap-8">
             <a href="#/terms" className="text-[var(--white)] hover:text-[var(--origin-label-bg)] transition-colors">Terms</a>
             <a href="#/privacy" className="text-[var(--white)] hover:text-[var(--origin-label-bg)] transition-colors">Privacy</a>
-            <a href="#" className="text-[var(--white)] hover:text-[var(--origin-label-bg)] transition-colors">Certifications</a>
           </div>
         </footer>
       </div>
