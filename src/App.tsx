@@ -436,7 +436,7 @@ export default function App() {
                     }}
                   >
                     <div
-                      className={`relative w-full h-full ${isIOSWebKit ? "" : "transition-transform duration-700"}`}
+                      className={`relative w-full h-full ${isIOSWebKit ? "origin-card-ios-motion" : "transition-transform duration-700"}`}
                       style={isIOSWebKit ? undefined : { transformStyle: "preserve-3d", transform: flippedCards[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}
                     >
                       <div

@@ -72,16 +72,21 @@
 
   .origin-card-fade-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: rotateY(0deg) translateY(0) scale(1);
     pointer-events: auto;
     transition: opacity 420ms ease, transform 420ms ease;
   }
 
   .origin-card-fade-hidden {
     opacity: 0;
-    transform: translateY(8px) scale(0.985);
+    transform: rotateY(-14deg) translateY(8px) scale(0.985);
     pointer-events: none;
     transition: opacity 420ms ease, transform 420ms ease;
+  }
+
+  .origin-card-ios-motion {
+    perspective: 1000px;
+    transform-style: flat;
   }
 
   .origin-card-panel {
