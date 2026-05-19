@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import {
   ArrowRight,
   Database,
@@ -21,13 +22,20 @@ export default function App() {
   const [hash, setHash] = useState(window.location.hash);
   const isTermsPage = hash === "#/terms";
   const isPrivacyPage = hash === "#/privacy";
-  const catalogMailto =
-    "mailto:info@greengoldjapan.com?subject=Catalog%20Request%20-%20GreenGold%20Japan&body=Hello%20GreenGold%20Japan%2C%0A%0AI%20would%20like%20to%20request%20your%20latest%20catalog%20and%20discuss%20Japanese%20matcha%20/%20tea%20sourcing.%0A%0ACompany%3A%0AName%3A%0ACountry%3A%0AInquiry%20details%3A%0A";
+  const isRequestCatalogPage = hash === "#/request-catalog";
+  const [formState, handleCatalogSubmit] = useForm("xkoenyej");
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const onHashChange = () => setHash(window.location.hash);
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (heroVideoRef.current) {
+      heroVideoRef.current.playbackRate = 0.5;
+    }
   }, []);
   const originCards = [
     {
@@ -163,7 +171,7 @@ export default function App() {
           </div>
           <article className="bg-[var(--white)] border border-[var(--company-border)] p-6 md:p-10">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">TERMS OF SERVICE</h1>
-            <p className="text-sm text-[var(--secondary-text)] mb-8">Last Updated: 2026/05/19</p>
+            <p className="text-sm text-[var(--secondary-text)] mb-8">Last Updated: May 19, 2026</p>
             <div className="space-y-6 text-[15px] leading-[1.75] text-[var(--secondary-text)]">
               <p>These Terms of Service ("Terms") govern your access to and use of the GreenGold Japan website (the "Website"), operated by General Future Co., Ltd. under the GreenGold Japan brand ("GreenGold", "we", "us", or "our").</p>
               <p>By accessing or using this Website, you agree to be bound by these Terms. If you do not agree, please do not use this Website.</p>
@@ -201,7 +209,7 @@ export default function App() {
           </div>
           <article className="bg-[var(--white)] border border-[var(--company-border)] p-6 md:p-10">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">PRIVACY POLICY</h1>
-            <p className="text-sm text-[var(--secondary-text)] mb-8">Last Updated: May 18, 2026</p>
+            <p className="text-sm text-[var(--secondary-text)] mb-8">Last Updated: May 19, 2026</p>
             <div className="space-y-6 text-[15px] leading-[1.75] text-[var(--secondary-text)]">
               <p>This Privacy Policy describes how GreenGold Japan ("GreenGold", "we", "us", or "our"), operated by General Future Co., Ltd., collects, uses, stores, and discloses personal information when you visit our website, request catalogs, submit business inquiries, or otherwise communicate with us.</p>
               <p>This website is intended for business users, distributors, wholesalers, importers, OEM partners, and other commercial counterparties.</p>
@@ -227,24 +235,110 @@ export default function App() {
     );
   }
 
+  if (isRequestCatalogPage) {
+    return (
+      <div className="min-h-screen bg-[var(--page-bg)] text-[var(--deep-text)]">
+        <main className="max-w-[720px] mx-auto px-6 md:px-8 py-12 md:py-16">
+          <div className="mb-8">
+            <a href="#" className="text-[var(--primary-green)] hover:text-[var(--primary-green-hover)] text-sm uppercase tracking-[0.12em]">
+              Back to Home
+            </a>
+          </div>
+
+          <header className="mb-8 md:mb-10">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--deep-text)]">Request Catalog</h1>
+            <p className="mt-3 text-[15px] md:text-base text-[var(--secondary-text)] leading-relaxed">
+              Tell us about your sourcing needs and we will get back to you shortly.
+            </p>
+          </header>
+
+          <section className="bg-[var(--white)] border border-[var(--company-border)] shadow-[0_12px_28px_rgba(17,24,20,0.08)] p-5 md:p-8">
+            {formState.succeeded ? (
+              <p className="text-[15px] leading-relaxed text-[var(--deep-text)]">
+                Thank you. We will contact you shortly.
+              </p>
+            ) : (
+              <form onSubmit={handleCatalogSubmit} className="space-y-4">
+                <input type="hidden" name="_subject" value="Catalog Request - GreenGold Japan" />
+                <input type="hidden" name="source" value="GreenGold Japan LP" />
+
+                <div>
+                  <label htmlFor="name" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">FULL NAME *</label>
+                  <input id="name" name="name" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                </div>
+
+                <div>
+                  <label htmlFor="company" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">COMPANY NAME *</label>
+                  <input id="company" name="company" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">BUSINESS EMAIL *</label>
+                  <input id="email" type="email" name="email" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                  <ValidationError prefix="Email" field="email" errors={formState.errors} className="mt-1 text-[11px] text-red-700" />
+                </div>
+
+                <div>
+                  <label htmlFor="country" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">COUNTRY / REGION *</label>
+                  <input id="country" name="country" required className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                </div>
+
+                <div>
+                  <label htmlFor="estimated_monthly_volume" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">ESTIMATED MONTHLY VOLUME *</label>
+                  <input id="estimated_monthly_volume" type="text" name="estimated_monthly_volume" required placeholder="e.g. 30 kg/month, 100–300 kg/month, or not sure yet" className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--secondary-text)] mb-1">INQUIRY DETAILS (OPTIONAL)</label>
+                  <textarea id="message" name="message" rows={5} placeholder="Please share your sourcing needs, preferred tea types, certifications, or any specific requirements." className="w-full border border-[var(--company-border)] bg-[var(--white)] px-3 py-2.5 text-[14px] text-[var(--deep-text)] placeholder:text-[var(--muted-text)] focus:outline-none focus:border-[var(--primary-green)]" />
+                  <ValidationError prefix="Message" field="message" errors={formState.errors} className="mt-1 text-[11px] text-red-700" />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={formState.submitting}
+                  className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] disabled:opacity-75 disabled:cursor-not-allowed py-3 text-[11px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors"
+                >
+                  {formState.submitting ? "Sending..." : "Request Catalog"}
+                </button>
+
+                {formState.errors && formState.errors.length > 0 && !formState.submitting && (
+                  <p className="text-[13px] text-[var(--deep-text)]">
+                    Submission failed. Please contact us at{" "}
+                    <a href="mailto:info@greengoldjapan.com" className="underline">info@greengoldjapan.com</a>.
+                  </p>
+                )}
+
+                <p className="text-[11px] leading-relaxed text-[var(--secondary-text)]">
+                  By submitting this form, you agree that we may use your information to respond to your inquiry in accordance with our{" "}
+                  <a href="#/privacy" className="underline text-[var(--deep-text)]">Privacy Policy</a>.
+                </p>
+              </form>
+            )}
+          </section>
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen font-sans selection:bg-brand-matcha selection:text-white relative bg-[var(--page-bg)] overflow-x-hidden">
       <div className="fixed inset-0 z-0 abstract-mesh dot-pattern opacity-10 pointer-events-none" />
 
       <div className="relative z-10 editorial-grid border-b border-brand-outline">
-        <header className="md:col-span-12 grid-cell border-b border-[var(--header-border)] bg-[var(--header-bg)]">
+        <header className="md:col-span-12 border-b border-[var(--header-border)] bg-[var(--header-bg)] px-7 md:px-9 py-2.5 md:py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center pr-4">
-              <img src="/green-gold-japan-logo-cropped.png" alt="Logo" className="h-[68px] md:h-[76px] w-auto object-contain" />
+              <img src="/favicon.png" alt="Logo" className="h-[56px] md:h-[64px] w-auto object-contain" />
             </div>
             <div className="flex items-center justify-center flex-1 px-3 md:px-6 min-w-0">
               <span className="font-sans font-medium text-[10px] md:text-[13px] tracking-[0.14em] md:tracking-[0.22em] uppercase text-[var(--secondary-text)] whitespace-nowrap truncate">
-                Matcha / Hojicha / OEM
+                Japanese Matcha / Hojicha / OEM
               </span>
             </div>
             <div className="flex items-center pl-4">
               <a
-                href={catalogMailto}
+                href="#/request-catalog"
                 className="font-sans font-semibold text-[12px] tracking-[0.18em] uppercase text-[var(--primary-green)] border border-[var(--primary-green)] rounded-[2px] px-4 md:px-5 py-2 transition-colors duration-200 hover:bg-[var(--primary-green)] hover:text-[var(--white)] whitespace-nowrap"
               >
                 Request Catalog
@@ -254,10 +348,18 @@ export default function App() {
         </header>
 
         <section className="md:col-span-7 md:row-span-6 grid-cell relative overflow-hidden min-h-[500px] bg-[var(--page-bg)]">
-          <div
-            className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-95 pointer-events-none z-[1]"
-            style={{ backgroundImage: "url('/hero-bg-tea-row-dark.png')" }}
-          />
+          <video
+            ref={heroVideoRef}
+            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-[1]"
+            autoPlay
+            muted
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            poster="/hero-bg-tea-row-dark.png"
+          >
+            <source src="/hero-bg-tea-field.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 pointer-events-none z-[1] bg-[var(--hero-overlay)]" />
           <div className="relative z-10">
             <h1 className="text-5xl md:text-7xl font-bold tracking-[-0.01em] leading-[0.92] mb-8 text-white [text-shadow:0_2px_14px_rgba(0,0,0,0.45)]">
@@ -267,7 +369,7 @@ export default function App() {
               Flexible OEM with Cost Efficiency.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href={catalogMailto} className="border border-white/72 text-white bg-transparent px-8 py-4 text-[11px] uppercase tracking-[0.16em] font-semibold flex items-center gap-3 group hover:bg-white/12 transition-colors [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">
+              <a href="#/request-catalog" className="border border-white/72 text-white bg-transparent px-8 py-4 text-[11px] uppercase tracking-[0.16em] font-semibold flex items-center gap-3 group hover:bg-white/12 transition-colors [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">
                 Request Catalog <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -372,13 +474,13 @@ export default function App() {
           </div>
         </section>
 
-        <section className="md:col-span-8 p-0 border-t border-[var(--company-border)] relative overflow-hidden">
-          <div className="grid-cell h-full border-r border-[var(--company-border)] relative z-10 bg-[var(--company-bg)]">
+        <section className="md:col-span-8 p-0 border-t border-[#D2D9CC] relative overflow-hidden">
+          <div className="grid-cell h-full border-r border-[#D2D9CC] relative z-10 bg-[#FAFBF6]">
             <div className="mb-12">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight max-w-sm text-[var(--deep-text)]">A More Efficient Supply Structure.</h2>
             </div>
             <div className="w-full">
-              <div className="grid grid-cols-3 text-[10px] uppercase font-semibold tracking-[0.14em] mb-4 pb-4 border-b border-[var(--company-border)] text-[var(--secondary-text)]">
+              <div className="grid grid-cols-3 text-[10px] uppercase font-semibold tracking-[0.14em] mb-4 pb-4 border-b border-[#D2D9CC] text-[var(--secondary-text)]">
                 <div className="col-span-1">Key Factor</div>
                 <div className="text-center text-[var(--primary-green)]">Our Direct-Origin Model</div>
                 <div className="text-center opacity-60">Traditional Trading Model</div>
@@ -387,15 +489,14 @@ export default function App() {
                 {[
                   ["Nationwide Producer Network", "○", "Limited"],
                   ["Direct-from-Origin Shipping", "○", "–"],
-                  ["Flexible Buyer-Specific Sourcing", "○", "–"],
                   ["OEM / Custom Development", "○", "Limited"],
-                  ["EU Pesticide / FDA / Halal Compliance Support", "Extensive", "Limited"],
+                  ["EU Pesticide / FDA / Organic Compliance", "Extensive", "Limited"],
                   ["Traceability", "High", "Limited"],
                   ["Freshness Retention", "Higher", "Lower"],
                   ["Inventory Overhead", "Lower", "Higher"],
                   ["Domestic Handling Cost", "Minimized", "Extra"],
                 ].map((row, i) => (
-                  <div key={i} className="grid grid-cols-3 py-4 border-b border-[var(--company-border)] last:border-none">
+                  <div key={i} className="grid grid-cols-3 py-4 border-b border-[#D2D9CC] last:border-none">
                     <span className="font-medium text-[var(--secondary-text)]">{row[0]}</span>
                     <span className="text-center font-bold text-[var(--primary-green)] text-sm leading-none">{row[1]}</span>
                     <span className="text-center text-[var(--secondary-text)]/70">{row[2]}</span>
@@ -406,13 +507,13 @@ export default function App() {
           </div>
         </section>
 
-        <section className="md:col-span-4 border-t border-l border-[var(--company-border)] bg-[var(--catalog-bg)] text-[var(--deep-text)] relative overflow-hidden h-full self-stretch flex flex-col">
-          <div className="relative z-10 p-6 md:p-7 grid grid-cols-1 gap-5 items-start border-b border-[var(--company-border)] basis-2/3">
+        <section className="md:col-span-4 border-t border-l border-[#CCD5C7] bg-[#EEF3E5] text-[var(--deep-text)] relative overflow-hidden h-full self-stretch flex flex-col">
+          <div className="relative z-10 p-6 md:p-7 grid grid-cols-1 gap-5 items-start border-b border-[#CCD5C7] basis-2/3">
             <div className="order-1 flex justify-center">
               <div className="relative w-full max-w-[270px]">
-                <div className="absolute inset-0 translate-x-2 translate-y-2 border border-[var(--company-border)]/70 bg-[var(--white)]/55" />
+                <div className="absolute inset-0 translate-x-2 translate-y-2 border border-[#CCD5C7]/70 bg-[var(--white)]/55" />
                 <article
-                  className="relative border border-[var(--company-border)] bg-[var(--white)] p-5 md:p-6 overflow-hidden shadow-none"
+                  className="relative border border-[#CCD5C7] bg-[var(--white)] p-5 md:p-6 overflow-hidden shadow-none"
                   style={{
                     aspectRatio: "210 / 297",
                     backgroundImage: "linear-gradient(rgba(255,255,255,0.42), rgba(255,255,255,0.42)), url('/catalog-bg.jpg')",
@@ -433,7 +534,7 @@ export default function App() {
                       <p className="text-[10px] uppercase tracking-[0.14em] text-[var(--deep-text)]">Origin Availability</p>
                     </div>
                     <div className="mt-auto">
-                      <div className="border-t border-[var(--company-border)] pt-3">
+                      <div className="border-t border-[#CCD5C7] pt-3">
                         <div className="flex items-end justify-between">
                           <span className="text-[9px] uppercase tracking-[0.14em] text-[var(--secondary-text)]">Export Sourcing File</span>
                           <span className="text-[9px] tracking-[0.12em] text-[var(--secondary-text)]">OSN-JP-026</span>
@@ -449,19 +550,19 @@ export default function App() {
             </div>
             <div className="order-2 space-y-4 w-full md:max-w-[320px] md:mx-auto">
               <p className="text-[10px] uppercase tracking-[0.12em] text-[var(--secondary-text)]">Full pricing, MOQ, and current availability are provided after inquiry.</p>
-              <a href={catalogMailto} className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors text-center block">Request Catalog</a>
+              <a href="#/request-catalog" className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors text-center block">Request Catalog</a>
             </div>
           </div>
           <div
-            className="p-6 md:p-8 border-t border-[var(--company-border)] relative z-10 basis-1/3 bg-[var(--company-bg)]"
+            className="p-6 md:p-8 border-t border-[#D9DED2] relative z-10 basis-1/3 bg-[#F8F8F3]"
           >
             <div className="grid grid-cols-[minmax(0,1fr)_minmax(136px,1fr)] items-start gap-3 md:flex md:flex-row md:justify-between md:gap-10">
               <div className="flex-1 min-w-0">
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[var(--muted-text)]">Company Information</span>
-                <p className="mt-4 text-[24px] md:text-[28px] lg:text-[32px] leading-[0.95] text-[var(--deep-text)]" style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 400 }}>
+                <p className="mt-4 text-[20px] md:text-[23px] lg:text-[26px] leading-[0.98] text-[var(--deep-text)]" style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 400 }}>
                   GreenGold Japan
                 </p>
-                <p className="mt-2 text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] text-[var(--secondary-text)]" style={{ fontFamily: '"Hanken Grotesk", sans-serif', fontWeight: 500 }}>
+                <p className="mt-2 text-[14px] md:text-[15px] lg:text-[16px] leading-[1.25] text-[var(--secondary-text)]" style={{ fontFamily: '"Hanken Grotesk", sans-serif', fontWeight: 500 }}>
                   <span className="whitespace-nowrap">Powered by</span>{" "}
                   <span className="whitespace-nowrap">General Future Co., Ltd.</span>
                 </p>
