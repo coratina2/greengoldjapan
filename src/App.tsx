@@ -25,6 +25,13 @@ export default function App() {
   const isRequestCatalogPage = hash === "#/request-catalog";
   const [formState, handleCatalogSubmit] = useForm("xkoenyej");
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+  const isIOSWebKit = (() => {
+    const ua = navigator.userAgent || "";
+    const platform = navigator.platform || "";
+    const touchPoints = navigator.maxTouchPoints || 0;
+    const iOSDevice = /iPad|iPhone|iPod/.test(ua) || (platform === "MacIntel" && touchPoints > 1);
+    return iOSDevice && /AppleWebKit/.test(ua);
+  })();
 
   useEffect(() => {
     const onHashChange = () => setHash(window.location.hash);
@@ -428,10 +435,13 @@ export default function App() {
                       if (!st?.moved) setFlippedCards((prev) => ({ ...prev, [i]: !prev[i] }));
                     }}
                   >
-                    <div className="relative w-full h-full transition-transform duration-700" style={{ transformStyle: "preserve-3d", transform: flippedCards[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}>
+                    <div
+                      className={`relative w-full h-full ${isIOSWebKit ? "" : "transition-transform duration-700"}`}
+                      style={isIOSWebKit ? undefined : { transformStyle: "preserve-3d", transform: flippedCards[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}
+                    >
                       <div
-                        className="absolute inset-0 p-6 overflow-hidden"
-                        style={{ backfaceVisibility: "hidden" }}
+                        className={`origin-card-face ${isIOSWebKit ? (flippedCards[i] ? "origin-card-fade-hidden" : "origin-card-fade-visible") : ""}`}
+                        style={isIOSWebKit ? undefined : { backfaceVisibility: "hidden" }}
                       >
                         <div
                           className="absolute inset-0 bg-center bg-cover"
@@ -439,7 +449,7 @@ export default function App() {
                             backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.png')`,
                           }}
                         />
-                        <div className="absolute left-3 right-3 top-3 h-[58%] rounded-[2px] bg-[rgba(11,79,47,0.72)] backdrop-blur-[1px]" />
+                        <div className="origin-card-panel absolute left-3 right-3 top-3 h-[58%] rounded-[2px] bg-[rgba(11,79,47,0.72)]" />
                         <div className="relative z-10 flex justify-between items-start mb-8">
                           <span className="text-[10px] text-[rgba(255,255,255,0.82)]">{String(i + 1).padStart(2, "0")}</span>
                           <Database className="w-3 h-3 text-[rgba(255,255,255,0.70)]" />
@@ -452,8 +462,8 @@ export default function App() {
                         </div>
                       </div>
                       <div
-                        className="absolute inset-0 p-6 overflow-hidden"
-                        style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+                        className={`origin-card-face ${isIOSWebKit ? (flippedCards[i] ? "origin-card-fade-visible" : "origin-card-fade-hidden") : ""}`}
+                        style={isIOSWebKit ? undefined : { backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                       >
                         <div
                           className="absolute inset-0 bg-center bg-cover"
@@ -461,7 +471,7 @@ export default function App() {
                             backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.png')`,
                           }}
                         />
-                        <div className="absolute left-3 right-3 top-3 h-[62%] rounded-[2px] bg-[rgba(11,79,47,0.72)] backdrop-blur-[1px]" />
+                        <div className="origin-card-panel absolute left-3 right-3 top-3 h-[62%] rounded-[2px] bg-[rgba(11,79,47,0.72)]" />
                         <span className="relative z-10 text-[9px] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.70)] block mb-4">Origin Overview</span>
                         <h3 className="relative z-10 text-xs font-bold tracking-widest mb-3 text-[var(--white)] uppercase">{origin.name}</h3>
                         <p className="relative z-10 text-[11px] leading-relaxed max-w-[30ch] text-[rgba(255,255,255,0.92)]">{origin.overview}</p>

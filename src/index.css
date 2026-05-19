@@ -65,4 +65,32 @@
     background-image: radial-gradient(rgba(17, 20, 18, 0.12) 0.5px, transparent 0.5px);
     background-size: 26px 26px;
   }
+
+  .origin-card-face {
+    @apply absolute inset-0 p-6 overflow-hidden;
+  }
+
+  .origin-card-fade-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 420ms ease;
+  }
+
+  .origin-card-fade-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 420ms ease;
+  }
+
+  .origin-card-panel {
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .origin-card-panel {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
 }
