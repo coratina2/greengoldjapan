@@ -44,6 +44,24 @@ export default function App() {
       heroVideoRef.current.playbackRate = 0.5;
     }
   }, []);
+
+  useEffect(() => {
+    if (!formState.succeeded) return;
+
+    const gtag = (window as typeof window & {
+      gtag?: (
+        command: "event",
+        eventName: string,
+        parameters?: Record<string, string>
+      ) => void;
+    }).gtag;
+
+    gtag?.("event", "generate_lead", {
+      form_name: "catalog_request",
+      form_location: "request_catalog_page",
+    });
+  }, [formState.succeeded]);
+
   const originCards = [
     {
       name: "MINAMIKYUSHU",
