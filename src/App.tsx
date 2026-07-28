@@ -464,7 +464,7 @@ export default function App() {
                         <div
                           className="absolute inset-0 bg-center bg-cover"
                           style={{
-                            backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.png')`,
+                            backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.webp')`,
                           }}
                         />
                         <div className="origin-card-panel absolute left-3 right-3 top-3 h-[58%] rounded-[2px] bg-[rgba(11,79,47,0.72)]" />
@@ -486,7 +486,7 @@ export default function App() {
                         <div
                           className="absolute inset-0 bg-center bg-cover"
                           style={{
-                            backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.png')`,
+                            backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.webp')`,
                           }}
                         />
                         <div className="origin-card-panel absolute left-3 right-3 top-3 h-[62%] rounded-[2px] bg-[rgba(11,79,47,0.72)]" />
@@ -544,7 +544,7 @@ export default function App() {
                   className="relative border border-[#CCD5C7] bg-[var(--white)] p-5 md:p-6 overflow-hidden shadow-none"
                   style={{
                     aspectRatio: "210 / 297",
-                    backgroundImage: "linear-gradient(rgba(255,255,255,0.42), rgba(255,255,255,0.42)), url('/catalog-bg.jpg')",
+                    backgroundImage: "linear-gradient(rgba(255,255,255,0.42), rgba(255,255,255,0.42)), url('/catalog-bg.webp')",
                     backgroundSize: "cover",
                     backgroundPosition: "70% center",
                     boxShadow: `0 10px 24px var(--catalog-shadow)`
