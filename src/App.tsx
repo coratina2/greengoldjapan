@@ -381,7 +381,7 @@ export default function App() {
             playsInline
             preload="metadata"
             aria-hidden="true"
-            poster="/hero-bg-tea-row-dark.png"
+            poster="/hero-bg-tea-row-dark.webp"
           >
             <source src="/hero-bg-tea-field.mp4" type="video/mp4" />
           </video>
