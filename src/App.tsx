@@ -17,8 +17,8 @@ import {
 
 export default function App() {
   const currentYear = new Date().getFullYear();
-  const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
-  const [dragState, setDragState] = useState<Record<number, { x: number; y: number; moved: boolean }>>({});
+  const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
+  const [dragState, setDragState] = useState<Record<string, { x: number; y: number; moved: boolean }>>({});
   const [hash, setHash] = useState(window.location.hash);
   const isTermsPage = hash === "#/terms";
   const isPrivacyPage = hash === "#/privacy";
@@ -62,127 +62,22 @@ export default function App() {
     });
   }, [formState.succeeded]);
 
-  const originCards = [
-    {
-      name: "MINAMIKYUSHU",
-      location: "Kagoshima",
-      cultivars: "Okumidori, Yabukita, Yutakamidori, Saemidori, Asatsuyu",
-      overview: "Largest large-scale supply node in Japan."
-    },
-    {
-      name: "NISHIO",
-      location: "Aichi",
-      cultivars: "Samidori, Yabukita, Asahi, Okumidori",
-      overview: "Specialized tencha production hub."
-    },
-    {
-      name: "WAZUKA",
-      location: "Kyoto",
-      cultivars: "Yabukita, Okumidori, Saemidori, Samidori, Houshun, Okuyutaka",
-      overview: "Diverse premium-origin supply network."
-    },
-    {
-      name: "SHIBUSHI",
-      location: "Kagoshima",
-      cultivars: "Okumidori, Yabukita, Saemidori",
-      overview: "Efficient large-scale production node."
-    },
-    {
-      name: "UJI",
-      location: "Kyoto",
-      cultivars: "Samidori, Asahi, Okumidori, Gokou",
-      overview: "Historic premium matcha origin."
-    },
-    {
-      name: "JOYO",
-      location: "Kyoto",
-      cultivars: "Samidori, Asahi, Okumidori",
-      overview: "High-grade competition-level tencha area."
-    },
-    {
-      name: "KYOTANABE",
-      location: "Kyoto",
-      cultivars: "Samidori, Asahi, Okumidori, Gokou",
-      overview: "Premium gyokuro-based tencha sourcing."
-    },
-    {
-      name: "SHIMADA",
-      location: "Shizuoka",
-      cultivars: "Okumidori, Seimei, Yabukita",
-      overview: "Export-focused organic-compatible node."
-    },
-    {
-      name: "YAME",
-      location: "Fukuoka",
-      cultivars: "Okumidori, Saemidori, Yabukita, Samidori, Kanayamidori, Yamakai, Okuyutaka, Gokou, Asatsuyu",
-      overview: "Rich umami-focused premium sourcing."
-    },
-    {
-      name: "SUZUKA",
-      location: "Mie",
-      cultivars: "Yabukita, Okumidori",
-      overview: "Rapidly growing tencha conversion area."
-    },
-    {
-      name: "FUJIEDA",
-      location: "Shizuoka",
-      cultivars: "Okumidori, Yabukita, Saemidori",
-      overview: "Early high-quality tencha development zone."
-    },
-    {
-      name: "KIRISHIMA",
-      location: "Kagoshima",
-      cultivars: "Okumidori, Yabukita, Saemidori",
-      overview: "Aromatic highland production node."
-    },
-    {
-      name: "UJITAWARA",
-      location: "Kyoto",
-      cultivars: "Yabukita, Samidori, Okumidori",
-      overview: "Historic high-quality tea production region."
-    },
-    {
-      name: "MINAMIYAMASHIRO",
-      location: "Kyoto",
-      cultivars: "Yabukita, Okumidori",
-      overview: "Strong aroma mountain-origin node."
-    },
-    {
-      name: "KIZUGAWA",
-      location: "Kyoto",
-      cultivars: "Yabukita, Okumidori",
-      overview: "Integrated large-scale managed tea area."
-    },
-    {
-      name: "SHIZUOKA",
-      location: "Shizuoka",
-      cultivars: "Okumidori, Yabukita, Okuhikari, Sawamizuka, Kanayamidori",
-      overview: "Diverse processing-grade sourcing base."
-    },
-    {
-      name: "TOYOTA",
-      location: "Aichi",
-      cultivars: "Yabukita, Samidori",
-      overview: "Regional supplementary supply node."
-    },
-    {
-      name: "YOKKAICHI",
-      location: "Mie",
-      cultivars: "Yabukita, Okumidori",
-      overview: "Ise tea-based production support node."
-    },
-    {
-      name: "AYABE",
-      location: "Kyoto",
-      cultivars: "Yabukita, Okumidori",
-      overview: "Northern Kyoto industrial production node."
-    },
-    {
-      name: "ANJO",
-      location: "Aichi",
-      cultivars: "Samidori, Yabukita",
-      overview: "Strategic supplementary Nishio-area node."
-    }
+  const cultivarCards = [
+    { id: "01", name: "OKUMIDORI", regions: "Shizuoka, Kagoshima, Kyoto", flavorColor: "Deep green color with a mild, clean flavor; shading can enhance umami.", originAndBreeding: "Developed by crossing Yabukita with Shizuoka Zairai No. 16." },
+    { id: "02", name: "YABUKITA", regions: "Shizuoka, Kagoshima, Mie, Miyazaki", flavorColor: "Balanced flavor and aroma; one of Japan's most widely grown cultivars.", originAndBreeding: "Selected by Hikosaburo Sugiyama from a tea garden in Shizuoka Prefecture." },
+    { id: "03", name: "SAMIDORI", regions: "Kyoto", flavorColor: "Pale green, glossy leaves valued for tencha color, aroma, and flavor.", originAndBreeding: "Selected from tea plants native to the Uji area of Kyoto Prefecture." },
+    { id: "04", name: "ASAHI", regions: "Kyoto", flavorColor: "Bright green, thin, large leaves valued for high-grade tencha and matcha.", originAndBreeding: "Selected from tea plants native to the Uji area of Kyoto Prefecture." },
+    { id: "05", name: "GOKOU", regions: "Kyoto", flavorColor: "Distinctive aroma and high quality as gyokuro.", originAndBreeding: "Selected from tea plants native to the Uji area of Kyoto Prefecture." },
+    { id: "06", name: "UJI HIKARI", regions: "Kyoto", flavorColor: "Bright-color tencha with uniform shape and tender leaves; also valued for gyokuro.", originAndBreeding: "Developed by the Kyoto Tea Research Institute." },
+    { id: "07", name: "UJI MIDORI", regions: "Kyoto", flavorColor: "Valued for its color and quality as gyokuro.", originAndBreeding: "Selected from tea plants native to the Uji area of Kyoto Prefecture." },
+    { id: "08", name: "KYO MIDORI", regions: "Kyoto", flavorColor: "Used for gyokuro; specific flavor and aroma descriptions vary by source.", originAndBreeding: "Selected from tea plants native to the Uji area and developed as a gyokuro cultivar." },
+    { id: "09", name: "SAEMIDORI", regions: "Kagoshima, Miyazaki, Kumamoto", flavorColor: "Bright green color and high-quality flavor.", originAndBreeding: "Developed by crossing Yabukita with Asatsuyu." },
+    { id: "10", name: "TENMYO", regions: "Kyoto", flavorColor: "Suitable for mechanically harvested tencha, with vivid color and shaded-tea aroma.", originAndBreeding: "Selected from open-pollinated seedlings of Samidori by the Kyoto Tea Research Institute." },
+    { id: "11", name: "HOSHUN", regions: "Kyoto", flavorColor: "Early-ripening gyokuro cultivar with a fresh, pronounced aroma.", originAndBreeding: "Selected from open-pollinated seedlings of Samidori by the Kyoto Tea Research Institute." },
+    { id: "12", name: "KIRARI 31", regions: "Miyazaki", flavorColor: "High amino acid content, attractive color, and mild flavor.", originAndBreeding: "Developed by crossing Sakimidori with Saemidori in Miyazaki Prefecture." },
+    { id: "13", name: "KOSHUN", regions: "Shizuoka", flavorColor: "Known for its distinctive aroma.", originAndBreeding: "Developed by crossing Kurasawa with Kanayamidori in Shizuoka Prefecture." },
+    { id: "14", name: "TSUYUHIKARI", regions: "Shizuoka, Kagoshima, Mie", flavorColor: "Flavor and color vary with growing and processing conditions.", originAndBreeding: "Developed by crossing Shizu 7132 with Asatsuyu." },
+    { id: "15", name: "SEIMEI", regions: "Kagoshima, Miyazaki", flavorColor: "Bright green leaves suited to covered cultivation, tencha, and powdered tea.", originAndBreeding: "Developed by NARO by crossing Fushun with Saemidori." }
   ];
 
   if (isTermsPage) {
@@ -327,7 +222,7 @@ export default function App() {
                   {formState.submitting ? "Sending..." : "Request Catalog"}
                 </button>
 
-                {formState.errors && formState.errors.length > 0 && !formState.submitting && (
+                {formState.errors && Object.keys(formState.errors).length > 0 && !formState.submitting && (
                   <p className="text-[13px] text-[var(--deep-text)]">
                     Submission failed. Please contact us at{" "}
                     <a href="mailto:info@greengoldjapan.com" className="underline">info@greengoldjapan.com</a>.
@@ -427,72 +322,74 @@ export default function App() {
           <div className="flex flex-col md:flex-row h-full">
             <div className="md:w-1/6 p-8 border-r border-[var(--company-border)] flex flex-col justify-between bg-[var(--origin-label-bg)]">
               <div>
-                <span className="text-label text-[var(--deep-text)]">Origin Archive</span>
-                <p className="text-xs leading-relaxed text-[var(--muted-text)]">Primary sourcing nodes across Japan&apos;s major tea regions.</p>
+                <span className="text-label text-[var(--deep-text)]">Cultivar Archive</span>
+                <p className="text-xs leading-relaxed text-[var(--muted-text)]">Japan&apos;s matcha cultivars, their character, and where they are grown.</p>
               </div>
             </div>
             <div className="flex-1 overflow-x-auto">
               <div className="flex gap-[10px] md:gap-[14px] min-w-max p-3 md:p-4">
-                {originCards.map((origin, i) => (
+                {cultivarCards.map((cultivar) => (
                   <button
-                    key={origin.name}
+                    key={cultivar.id}
                     type="button"
-                    aria-label={`${origin.name} origin card, tap to ${flippedCards[i] ? "show front" : "show overview"}`}
+                    aria-label={`${cultivar.name} cultivar card, tap to ${flippedCards[cultivar.id] ? "show front" : "show details"}`}
                     className="relative w-[254px] h-[286px] cursor-pointer border border-[rgba(17,24,20,0.10)] bg-[#F8F8F3] shadow-[0_12px_28px_rgba(17,24,20,0.08)] overflow-hidden text-left"
-                    onPointerDown={(e) => setDragState((prev) => ({ ...prev, [i]: { x: e.clientX, y: e.clientY, moved: false } }))}
+                    onPointerDown={(e) => setDragState((prev) => ({ ...prev, [cultivar.id]: { x: e.clientX, y: e.clientY, moved: false } }))}
                     onPointerMove={(e) =>
                       setDragState((prev) => {
-                        const cur = prev[i];
+                        const cur = prev[cultivar.id];
                         if (!cur) return prev;
                         const moved = cur.moved || Math.abs(e.clientX - cur.x) > 7 || Math.abs(e.clientY - cur.y) > 7;
-                        return moved === cur.moved ? prev : { ...prev, [i]: { ...cur, moved } };
+                        return moved === cur.moved ? prev : { ...prev, [cultivar.id]: { ...cur, moved } };
                       })
                     }
                     onPointerUp={() => {
-                      const st = dragState[i];
-                      if (!st?.moved) setFlippedCards((prev) => ({ ...prev, [i]: !prev[i] }));
+                      const st = dragState[cultivar.id];
+                      if (!st?.moved) setFlippedCards((prev) => ({ ...prev, [cultivar.id]: !prev[cultivar.id] }));
                     }}
                   >
                     <div
                       className={`relative w-full h-full ${isIOSWebKit ? "origin-card-ios-motion" : "transition-transform duration-700"}`}
-                      style={isIOSWebKit ? undefined : { transformStyle: "preserve-3d", transform: flippedCards[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}
+                      style={isIOSWebKit ? undefined : { transformStyle: "preserve-3d", transform: flippedCards[cultivar.id] ? "rotateY(180deg)" : "rotateY(0deg)" }}
                     >
                       <div
-                        className={`origin-card-face ${isIOSWebKit ? (flippedCards[i] ? "origin-card-fade-hidden" : "origin-card-fade-visible") : ""}`}
+                        className={`origin-card-face ${isIOSWebKit ? (flippedCards[cultivar.id] ? "origin-card-fade-hidden" : "origin-card-fade-visible") : ""}`}
                         style={isIOSWebKit ? undefined : { backfaceVisibility: "hidden" }}
                       >
                         <div
                           className="absolute inset-0 bg-center bg-cover"
                           style={{
-                            backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.webp')`,
+                            backgroundImage: `url('/origin-topo/${cultivar.id}.webp')`,
                           }}
                         />
                         <div className="origin-card-panel absolute left-3 right-3 top-3 h-[58%] rounded-[2px] bg-[rgba(11,79,47,0.72)]" />
                         <div className="relative z-10 flex justify-between items-start mb-8">
-                          <span className="text-[10px] text-[rgba(255,255,255,0.82)]">{String(i + 1).padStart(2, "0")}</span>
+                          <span className="text-[10px] text-[rgba(255,255,255,0.82)]">{cultivar.id}</span>
                           <Database className="w-3 h-3 text-[rgba(255,255,255,0.70)]" />
                         </div>
-                        <h3 className="relative z-10 text-xs font-bold tracking-widest mb-1 text-[var(--white)] uppercase">{origin.name}</h3>
-                        <span className="relative z-10 text-[9px] uppercase tracking-tighter mb-5 block text-[rgba(255,255,255,0.82)]">{origin.location}</span>
-                        <p className="relative z-10 text-[10px] leading-relaxed max-w-[28ch] text-[rgba(255,255,255,0.92)]">{origin.cultivars}</p>
+                        <h3 className="relative z-10 text-xs font-bold tracking-widest mb-1 text-[var(--white)] uppercase">{cultivar.name}</h3>
+                        <span className="relative z-10 text-[9px] uppercase tracking-tighter mb-5 block text-[rgba(255,255,255,0.82)]">{cultivar.regions}</span>
                         <div className="absolute z-10 bottom-2 right-3 text-[8px] tracking-[0.10em] uppercase text-[rgba(255,255,255,0.70)] font-semibold">
-                          Node {String(i + 1).padStart(2, "0")}
+                          Card {cultivar.id}
                         </div>
                       </div>
                       <div
-                        className={`origin-card-face ${isIOSWebKit ? (flippedCards[i] ? "origin-card-fade-visible" : "origin-card-fade-hidden") : ""}`}
+                        className={`origin-card-face ${isIOSWebKit ? (flippedCards[cultivar.id] ? "origin-card-fade-visible" : "origin-card-fade-hidden") : ""}`}
                         style={isIOSWebKit ? undefined : { backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                       >
                         <div
                           className="absolute inset-0 bg-center bg-cover"
                           style={{
-                            backgroundImage: `url('/origin-topo/${String(i + 1).padStart(2, "0")}.webp')`,
+                            backgroundImage: `url('/origin-topo/${cultivar.id}.webp')`,
                           }}
                         />
                         <div className="origin-card-panel absolute left-3 right-3 top-3 h-[62%] rounded-[2px] bg-[rgba(11,79,47,0.72)]" />
-                        <span className="relative z-10 text-[9px] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.70)] block mb-4">Origin Overview</span>
-                        <h3 className="relative z-10 text-xs font-bold tracking-widest mb-3 text-[var(--white)] uppercase">{origin.name}</h3>
-                        <p className="relative z-10 text-[11px] leading-relaxed max-w-[30ch] text-[rgba(255,255,255,0.92)]">{origin.overview}</p>
+                        <span className="relative z-10 text-[9px] uppercase tracking-[0.16em] text-[rgba(255,255,255,0.70)] block mb-3">Cultivar Profile</span>
+                        <h3 className="relative z-10 text-xs font-bold tracking-widest mb-2 text-[var(--white)] uppercase">{cultivar.name}</h3>
+                        <div className="relative z-10 space-y-2 text-[10px] leading-[1.35] text-[rgba(255,255,255,0.92)]">
+                          <p><span className="block text-[8px] uppercase tracking-[0.12em] text-[rgba(255,255,255,0.70)]">Flavor &amp; color</span>{cultivar.flavorColor}</p>
+                          <p><span className="block text-[8px] uppercase tracking-[0.12em] text-[rgba(255,255,255,0.70)]">Origin and breeding</span>{cultivar.originAndBreeding}</p>
+                        </div>
                       </div>
                     </div>
                   </button>
