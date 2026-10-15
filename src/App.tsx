@@ -356,7 +356,10 @@ export default function App() {
                         className={`origin-card-face ${isIOSWebKit ? (flippedCards[cultivar.id] ? "origin-card-fade-hidden" : "origin-card-fade-visible") : ""}`}
                         style={isIOSWebKit ? undefined : { backfaceVisibility: "hidden" }}
                       >
-                        <div\n                          role="img"\n                          aria-label={`${cultivar.name} cultivar image`}\n                          className="absolute inset-0 bg-center bg-cover"
+                        <div
+                          role="img"
+                          aria-label={`${cultivar.name} cultivar image`}
+                          className="absolute inset-0 bg-center bg-cover"
                           style={{
                             backgroundImage: `url('/origin-topo/${cultivar.id}.webp')`,
                           }}
@@ -376,7 +379,10 @@ export default function App() {
                         className={`origin-card-face ${isIOSWebKit ? (flippedCards[cultivar.id] ? "origin-card-fade-visible" : "origin-card-fade-hidden") : ""}`}
                         style={isIOSWebKit ? undefined : { backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                       >
-                        <div\n                          role="img"\n                          aria-label={`${cultivar.name} cultivar image`}\n                          className="absolute inset-0 bg-center bg-cover"
+                        <div
+                          role="img"
+                          aria-label={`${cultivar.name} cultivar image`}
+                          className="absolute inset-0 bg-center bg-cover"
                           style={{
                             backgroundImage: `url('/origin-topo/${cultivar.id}.webp')`,
                           }}
