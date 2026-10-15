@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://greengoldjapan.com/sitemap.xml
+Sitemap: https://www.greengoldjapan.com/sitemap.xml
