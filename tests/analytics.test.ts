@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { trackCtaClick, trackFormStart } from "../src/analytics";
+import { trackCtaClick, trackFormStart, trackFormSubmitError } from "../src/analytics";
 
 const events: Array<{ name: string; parameters?: Record<string, string> }> = [];
 
@@ -15,6 +15,8 @@ trackCtaClick("hero");
 
 trackFormStart();
 
+trackFormSubmitError();
+
 assert.deepEqual(events, [
   {
     name: "cta_click",
@@ -25,6 +27,13 @@ assert.deepEqual(events, [
   },
   {
     name: "form_start",
+    parameters: {
+      form_name: "catalog_request",
+      form_location: "request_catalog_page",
+    },
+  },
+  {
+    name: "form_submit_error",
     parameters: {
       form_name: "catalog_request",
       form_location: "request_catalog_page",

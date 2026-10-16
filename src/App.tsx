@@ -14,7 +14,7 @@ import {
   Shield,
   ChevronDown,
 } from "lucide-react";
-import { trackCtaClick, trackFormStart, trackRequestCatalogView } from "./analytics";
+import { trackCtaClick, trackFormStart, trackFormSubmitError, trackRequestCatalogView } from "./analytics";
 
 export default function App() {
   const currentYear = new Date().getFullYear();
@@ -26,6 +26,7 @@ export default function App() {
   const isRequestCatalogPage = hash === "#/request-catalog";
   const [formState, handleCatalogSubmit] = useForm("xkoenyej");
   const formStartedRef = useRef(false);
+  const formErrorTrackedRef = useRef(false);
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const isIOSWebKit = (() => {
     const ua = navigator.userAgent || "";
@@ -67,6 +68,15 @@ export default function App() {
       form_location: "request_catalog_page",
     });
   }, [formState.succeeded]);
+
+  useEffect(() => {
+    const hasErrors = formState.errors && Object.keys(formState.errors).length > 0;
+    if (hasErrors && !formState.submitting && !formState.succeeded && !formErrorTrackedRef.current) {
+      formErrorTrackedRef.current = true;
+      trackFormSubmitError();
+    }
+    if (!hasErrors) formErrorTrackedRef.current = false;
+  }, [formState.errors, formState.submitting, formState.succeeded]);
 
   const handleFormStart = () => {
     if (formStartedRef.current) return;

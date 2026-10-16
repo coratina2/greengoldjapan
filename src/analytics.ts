@@ -42,3 +42,18 @@ export function trackFormStart() {
     form_location: "request_catalog_page",
   });
 }
+
+export function trackFormSubmitError() {
+  const gtag = (window as typeof window & {
+    gtag?: (
+      command: "event",
+      eventName: string,
+      parameters?: Record<string, string>
+    ) => void;
+  }).gtag;
+
+  gtag?.("event", "form_submit_error", {
+    form_name: "catalog_request",
+    form_location: "request_catalog_page",
+  });
+}
