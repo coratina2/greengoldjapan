@@ -14,7 +14,7 @@ import {
   Shield,
   ChevronDown,
 } from "lucide-react";
-import { trackCtaClick, trackRequestCatalogView } from "./analytics";
+import { trackCtaClick, trackFormStart, trackRequestCatalogView } from "./analytics";
 
 export default function App() {
   const currentYear = new Date().getFullYear();
@@ -25,6 +25,7 @@ export default function App() {
   const isPrivacyPage = hash === "#/privacy";
   const isRequestCatalogPage = hash === "#/request-catalog";
   const [formState, handleCatalogSubmit] = useForm("xkoenyej");
+  const formStartedRef = useRef(false);
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const isIOSWebKit = (() => {
     const ua = navigator.userAgent || "";
@@ -66,6 +67,12 @@ export default function App() {
       form_location: "request_catalog_page",
     });
   }, [formState.succeeded]);
+
+  const handleFormStart = () => {
+    if (formStartedRef.current) return;
+    formStartedRef.current = true;
+    trackFormStart();
+  };
 
   const cultivarCards = [
     { id: "01", name: "OKUMIDORI", regions: "Shizuoka, Kagoshima, Kyoto", flavorColor: "Deep green color with a mild, clean flavor; shading can enhance umami.", originAndBreeding: "Developed by crossing Yabukita with Shizuoka Zairai No. 16." },
@@ -183,7 +190,7 @@ export default function App() {
                 Thank you. We will contact you shortly.
               </p>
             ) : (
-              <form onSubmit={handleCatalogSubmit} className="space-y-4">
+              <form onSubmit={handleCatalogSubmit} onFocus={handleFormStart} className="space-y-4">
                 <input type="hidden" name="_subject" value="Catalog Request - GreenGold Japan" />
                 <input type="hidden" name="source" value="GreenGold Japan LP" />
 

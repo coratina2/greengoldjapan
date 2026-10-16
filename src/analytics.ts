@@ -27,3 +27,18 @@ export function trackRequestCatalogView() {
     page_location: "hash_route",
   });
 }
+
+export function trackFormStart() {
+  const gtag = (window as typeof window & {
+    gtag?: (
+      command: "event",
+      eventName: string,
+      parameters?: Record<string, string>
+    ) => void;
+  }).gtag;
+
+  gtag?.("event", "form_start", {
+    form_name: "catalog_request",
+    form_location: "request_catalog_page",
+  });
+}
