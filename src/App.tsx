@@ -14,7 +14,7 @@ import {
   Shield,
   ChevronDown,
 } from "lucide-react";
-import { trackCtaClick } from "./analytics";
+import { trackCtaClick, trackRequestCatalogView } from "./analytics";
 
 export default function App() {
   const currentYear = new Date().getFullYear();
@@ -39,6 +39,10 @@ export default function App() {
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
+  useEffect(() => {
+    if (isRequestCatalogPage) trackRequestCatalogView();
+  }, [isRequestCatalogPage]);
 
   useEffect(() => {
     if (heroVideoRef.current) {
