@@ -14,6 +14,7 @@ import {
   Shield,
   ChevronDown,
 } from "lucide-react";
+import { trackCtaClick } from "./analytics";
 
 export default function App() {
   const currentYear = new Date().getFullYear();
@@ -259,6 +260,7 @@ export default function App() {
             <div className="flex items-center pl-4">
               <a
                 href="#/request-catalog"
+                onClick={() => trackCtaClick("header")}
                 className="font-sans font-semibold text-[12px] tracking-[0.18em] uppercase text-[var(--primary-green)] border border-[var(--primary-green)] rounded-[2px] px-4 md:px-5 py-2 transition-colors duration-200 hover:bg-[var(--primary-green)] hover:text-[var(--white)] whitespace-nowrap"
               >
                 Request Catalog
@@ -289,7 +291,7 @@ export default function App() {
               Flexible OEM with Cost Efficiency.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#/request-catalog" className="border border-white/72 text-white bg-transparent px-8 py-4 text-[11px] uppercase tracking-[0.16em] font-semibold flex items-center gap-3 group hover:bg-white/12 transition-colors [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">
+              <a href="#/request-catalog" onClick={() => trackCtaClick("hero")} className="border border-white/72 text-white bg-transparent px-8 py-4 text-[11px] uppercase tracking-[0.16em] font-semibold flex items-center gap-3 group hover:bg-white/12 transition-colors [text-shadow:0_1px_10px_rgba(0,0,0,0.35)]">
                 Request Catalog <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -479,7 +481,7 @@ export default function App() {
             </div>
             <div className="order-2 space-y-4 w-full md:max-w-[320px] md:mx-auto">
               <p className="text-[10px] uppercase tracking-[0.12em] text-[var(--secondary-text)]">Full pricing, MOQ, and current availability are provided after inquiry.</p>
-              <a href="#/request-catalog" className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors text-center block">Request Catalog</a>
+              <a href="#/request-catalog" onClick={() => trackCtaClick("catalog")} className="w-full border border-[var(--primary-green)] bg-[var(--primary-green)] hover:bg-[var(--primary-green-hover)] py-4 text-[10px] uppercase tracking-[0.16em] font-semibold text-[var(--white)] transition-colors text-center block">Request Catalog</a>
             </div>
           </div>
           <div
